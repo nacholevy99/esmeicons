@@ -625,9 +625,7 @@
         </p>
 
         <div id="form-wrap-inner">
-          <form name="lista-espera" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
-            <input type="hidden" name="form-name" value="lista-espera" />
-            <p style="display:none;"><input name="bot-field" /></p>
+          <form onsubmit="handleSubmit(event)">
             <div class="input-stack">
               <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="off" />
               <input type="email" id="email" name="email" placeholder="Tu email" autocomplete="off" />
@@ -730,13 +728,9 @@
         return;
       }
 
-      const form = e.target;
-      const data = new FormData(form);
-
-      fetch('/', {
+      fetch('https://script.google.com/macros/s/AKfycbx2xjt2pUTExKo3eT_hMz1ZhdG6B59iQbbf3cHF1al5BUjz0NPKj0tVgVO90ETPGjwY/exec', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString()
+        body: JSON.stringify({ nombre: nombre, email: email })
       })
       .finally(() => {
         document.getElementById('form-wrap-inner').style.display = 'none';
