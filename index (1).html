@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICONS by Esme — Viene algo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #C8102E;
+      --red-dark: #9E0B22;
+      --red-glow: rgba(200, 16, 46, 0.12);
+      --bg: #F7F4F0;
+      --bg2: #EDEAE5;
+      --white: #FDFCFB;
+      --ink: #1C1917;
+      --ink2: #3D3935;
+      --muted: #7D7874;
+      --border: rgba(28,25,23,0.08);
+      --border2: rgba(28,25,23,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247,244,240,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--red); }
+
+    .nav-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--border2);
+      background: var(--white);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: blink 2.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      padding: 5rem 3rem 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Decorative large background letter */
+    .hero-left::before {
+      content: 'I';
+      position: absolute;
+      right: -0.1em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 28vw;
+      color: var(--bg2);
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--white);
+      border: 1px solid var(--border2);
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.5s ease both;
+      width: fit-content;
+    }
+
+    .hero-tag-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: clamp(3.2rem, 5vw, 5.2rem);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.75rem;
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+
+    .hero-headline .red { color: var(--red); }
+
+    .hero-headline .stroke {
+      -webkit-text-stroke: 2px var(--ink2);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 400px;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.5s ease 0.2s both;
+    }
+
+    .hero-chips {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.5s ease 0.3s both;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--white);
+      border: 1px solid var(--border2);
+      padding: 0.45rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      color: var(--ink2);
+      font-weight: 400;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .chip:hover {
+      border-color: rgba(200,16,46,0.25);
+      box-shadow: 0 2px 12px rgba(200,16,46,0.08);
+    }
+
+    /* ── FORM SIDE ── */
+    .hero-right {
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease 0.15s both;
+    }
+
+    /* Red glow inside dark panel */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(200,16,46,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Decorative shape */
+    .hero-right::after {
+      content: '✦';
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      font-size: 5rem;
+      color: rgba(255,255,255,0.03);
+      font-family: 'Playfair Display', serif;
+      pointer-events: none;
+    }
+
+    .form-wrap { position: relative; z-index: 1; width: 100%; max-width: 360px; }
+
+    .form-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .form-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--red);
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: #F5F2EE;
+      margin-bottom: 0.75rem;
+    }
+
+    .form-desc {
+      font-size: 0.88rem;
+      color: rgba(245,242,238,0.5);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .form-desc strong {
+      color: rgba(245,242,238,0.85);
+      font-weight: 500;
+    }
+
+    .input-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #F5F2EE;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    input::placeholder { color: rgba(245,242,238,0.25); }
+
+    input:focus {
+      border-color: rgba(200,16,46,0.5);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .btn-cta {
+      width: 100%;
+      padding: 1rem;
+      background: var(--red);
+      color: #F5F2EE;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(200,16,46,0.35);
+      margin-top: 0.25rem;
+    }
+
+    .btn-cta:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(200,16,46,0.45);
+    }
+
+    .btn-cta:active { transform: translateY(0); }
+
+    .form-fine {
+      font-size: 0.68rem;
+      color: rgba(245,242,238,0.25);
+      margin-top: 1rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* ── SUCCESS ── */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .success-state.show { display: flex; }
+
+    .success-icon {
+      font-size: 2rem;
+      animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: #F5F2EE;
+      letter-spacing: -0.01em;
+    }
+
+    .success-text {
+      font-size: 0.85rem;
+      color: rgba(245,242,238,0.5);
+      line-height: 1.65;
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      overflow: hidden;
+      padding: 0.85rem 0;
+      background: var(--red);
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 2rem;
+      animation: scroll 22s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(253,252,251,0.85);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .ticker-sep { color: rgba(253,252,251,0.4); }
+
+    /* ── FEATURES ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .feat {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+
+    .feat:hover { background: var(--white); }
+
+    .feat-line {
+      width: 32px; height: 2px;
+      background: var(--red);
+      margin-bottom: 1.75rem;
+      opacity: 0.6;
+      transition: width 0.3s, opacity 0.3s;
+    }
+
+    .feat:hover .feat-line { width: 48px; opacity: 1; }
+
+    .feat-emoji { font-size: 1.6rem; margin-bottom: 1rem; }
+
+    .feat-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .feat-text {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      padding: 7rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .bottom-left-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .bottom-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .bottom-title .stroke {
+      -webkit-text-stroke: 1.5px var(--ink2);
+      color: transparent;
+    }
+
+    .bottom-right-text {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      border-left: 2px solid var(--red);
+      padding-left: 1.5rem;
+    }
+
+    .bottom-right-text strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: #F5F2EE;
+    }
+
+    .footer-logo span { color: var(--red); }
+
+    .footer-shapes {
+      font-size: 1rem;
+      letter-spacing: 0.75rem;
+      color: rgba(245,242,238,0.2);
+    }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      color: rgba(245,242,238,0.25);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left { padding: 6rem 1.75rem 3rem; }
+      .hero-left::before { display: none; }
+      .hero-right { padding: 3rem 1.75rem 4rem; }
+
+      .features { grid-template-columns: 1fr; }
+
+      .bottom-cta {
+        grid-template-columns: 1fr;
+        padding: 4rem 1.75rem;
+        gap: 2rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+        padding: 2rem 1.75rem;
+      }
+
+      nav { padding: 1.25rem 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">ICONS <span>by Esme</span></a>
+    <div class="nav-pill">
+      <span class="nav-dot"></span>
+      Próximamente
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-left">
+      <div class="hero-content">
+
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Acne patches hidrocoloide
+        </div>
+
+        <h1 class="hero-headline">
+          El grano<br>
+          no se<br>
+          esconde.<br>
+          <span class="red">Se porta.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Parches para granos que funcionan de verdad — y que se ven tan bien que no vas a querer sacártelos.
+        </p>
+
+        <div class="hero-chips">
+          <div class="chip">♥ corazón</div>
+          <div class="chip">★ estrella</div>
+          <div class="chip">💋 labios</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="form-wrap">
+
+        <p class="form-eyebrow">Lista de espera</p>
+        <h2 class="form-title">Anotate.<br>No te quedes afuera.</h2>
+        <p class="form-desc">
+          Las primeras personas que se anoten se llevan un <strong>descuento exclusivo</strong> en el lanzamiento. Solo para la lista.
+        </p>
+
+        <div id="form-wrap-inner">
+          <form name="lista-espera" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+            <input type="hidden" name="form-name" value="lista-espera" />
+            <p style="display:none;"><input name="bot-field" /></p>
+            <div class="input-stack">
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="off" />
+              <input type="email" id="email" name="email" placeholder="Tu email" autocomplete="off" />
+            </div>
+            <button type="submit" class="btn-cta">Quiero mi descuento →</button>
+          </form>
+          <p class="form-fine">Sin spam. Solo te escribimos cuando lancemos.</p>
+        </div>
+
+        <div class="success-state" id="success">
+          <span class="success-icon">✦</span>
+          <p class="success-title">Estás adentro.</p>
+          <p class="success-text">Te guardamos el descuento. Cuando lancemos, sos de los primeros en saberlo.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">ICONS BY ESME <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">PARCHES HIDROCOLOIDE <span class="ticker-sep">♥</span></span>
+      <span class="ticker-item">DEEP COSMETIC RED <span class="ticker-sep">★</span></span>
+      <span class="ticker-item">PRÓXIMAMENTE <span class="ticker-sep">💋</span></span>
+      <span class="ticker-item">SIMPLES. ICÓNICOS. <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">LISTA ABIERTA <span class="ticker-sep">♥</span></span>
+      <span class="ticker-item">ICONS BY ESME <span class="ticker-sep">★</span></span>
+      <span class="ticker-item">PARCHES HIDROCOLOIDE <span class="ticker-sep">💋</span></span>
+      <span class="ticker-item">DEEP COSMETIC RED <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">PRÓXIMAMENTE <span class="ticker-sep">♥</span></span>
+      <span class="ticker-item">SIMPLES. ICÓNICOS. <span class="ticker-sep">★</span></span>
+      <span class="ticker-item">LISTA ABIERTA <span class="ticker-sep">💋</span></span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="feat">
+      <div class="feat-line"></div>
+      <div class="feat-emoji">🩹</div>
+      <h3 class="feat-title">100% Hidrocoloide</h3>
+      <p class="feat-text">El mismo material que usa la dermatología. Absorbe, protege y acelera la recuperación. Funciona de noche, funciona de día.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-line"></div>
+      <div class="feat-emoji">✦</div>
+      <h3 class="feat-title">Tres formas icónicas</h3>
+      <p class="feat-text">Corazón, estrella, labios. 15 parches por pack con las tres. Porque un granito antes del finde no tiene por qué arruinar el look.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-line"></div>
+      <div class="feat-emoji">🔴</div>
+      <h3 class="feat-title">Rojo vibrante</h3>
+      <p class="feat-text">Un rojo que no pide disculpas. El parche no se esconde — se convierte en parte del look. Hecho para ser visto, no para borrarse.</p>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <div>
+      <h2 class="bottom-title">
+        ¿Tenés un evento<br>
+        este finde?
+      </h2>
+    </div>
+    <div>
+      <p class="bottom-right-text">
+        Anotate en la lista y sé de las primeras personas en tener ICONS cuando lancemos. Con <strong>descuento exclusivo</strong> solo para quienes estuvieron desde el principio.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">ICONS <span>by Esme</span></span>
+    <span class="footer-shapes">♥ ★ 💋</span>
+    <span class="footer-copy">© 2026 — todos los derechos reservados</span>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!nombre) {
+        document.getElementById('nombre').style.borderColor = 'rgba(200,16,46,0.6)';
+        document.getElementById('nombre').focus();
+        return;
+      }
+
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById('email').style.borderColor = 'rgba(200,16,46,0.6)';
+        document.getElementById('email').focus();
+        return;
+      }
+
+      const form = e.target;
+      const data = new FormData(form);
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString()
+      })
+      .finally(() => {
+        document.getElementById('form-wrap-inner').style.display = 'none';
+        document.getElementById('success').classList.add('show');
+      });
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => { input.style.borderColor = ''; });
+    });
+  </script>
+
+</body>
+</html>
