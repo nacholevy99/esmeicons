@@ -118,7 +118,7 @@
       position: absolute;
       right: -0.1em;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(calc(-50% + var(--parallax-y, 0px)));
       font-family: 'Playfair Display', serif;
       font-weight: 800;
       font-size: 28vw;
@@ -127,6 +127,7 @@
       pointer-events: none;
       z-index: 0;
       letter-spacing: -0.05em;
+      transition: transform 0.1s linear;
     }
 
     .hero-content { position: relative; z-index: 1; }
@@ -199,12 +200,14 @@
       font-size: 0.78rem;
       color: var(--ink2);
       font-weight: 400;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      cursor: default;
     }
 
     .chip:hover {
       border-color: rgba(200,16,46,0.25);
-      box-shadow: 0 2px 12px rgba(200,16,46,0.08);
+      box-shadow: 0 4px 16px rgba(200,16,46,0.12);
+      transform: translateY(-2px);
     }
 
     /* ── FORM SIDE ── */
@@ -331,12 +334,30 @@
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       box-shadow: 0 4px 24px rgba(200,16,46,0.35);
       margin-top: 0.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-cta::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: none;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { left: -100%; }
+      50% { left: 150%; }
     }
 
     .btn-cta:hover {
       background: var(--red-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 32px rgba(200,16,46,0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,16,46,0.5);
     }
 
     .btn-cta:active { transform: translateY(0); }
@@ -429,10 +450,22 @@
       padding: 3rem 2.5rem;
       position: relative;
       overflow: hidden;
-      transition: background 0.25s;
+      transition: background 0.35s, transform 0.35s;
     }
 
-    .feat:hover { background: var(--white); }
+    .feat::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .feat:hover { background: var(--white); transform: translateY(-4px); }
+    .feat:hover::after { transform: scaleX(1); }
 
     .feat-line {
       width: 32px; height: 2px;
@@ -444,7 +477,13 @@
 
     .feat:hover .feat-line { width: 48px; opacity: 1; }
 
-    .feat-emoji { font-size: 1.6rem; margin-bottom: 1rem; }
+    .feat-emoji {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .feat:hover .feat-emoji { transform: scale(1.2) rotate(-5deg); }
 
     .feat-title {
       font-family: 'Playfair Display', serif;
@@ -538,6 +577,88 @@
       letter-spacing: 0.02em;
     }
 
+    /* ── FLOATING SHAPES ── */
+    .floating-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-shape {
+      position: absolute;
+      font-size: 1.4rem;
+      opacity: 0.06;
+      animation: floatShape 18s ease-in-out infinite;
+    }
+
+    .floating-shape:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; animation-duration: 20s; }
+    .floating-shape:nth-child(2) { top: 60%; left: 15%; animation-delay: -4s; animation-duration: 16s; }
+    .floating-shape:nth-child(3) { top: 30%; left: 70%; animation-delay: -8s; animation-duration: 22s; }
+    .floating-shape:nth-child(4) { top: 75%; left: 80%; animation-delay: -12s; animation-duration: 18s; }
+    .floating-shape:nth-child(5) { top: 45%; left: 40%; animation-delay: -6s; animation-duration: 24s; }
+
+    @keyframes floatShape {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(15px, -20px) rotate(5deg); }
+      50% { transform: translate(-10px, -35px) rotate(-3deg); }
+      75% { transform: translate(20px, -15px) rotate(8deg); }
+    }
+
+    /* ── MOUSE GLOW ── */
+    .mouse-glow {
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,16,46,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+
+    .hero-right:hover .mouse-glow { opacity: 1; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── CONFETTI ── */
+    .confetti-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px; height: 8px;
+      top: -10px;
+      animation: confettiFall 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg) scale(0.3); opacity: 0; }
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
@@ -588,6 +709,13 @@
   <section class="hero">
 
     <div class="hero-left">
+      <div class="floating-shapes">
+        <span class="floating-shape">♥</span>
+        <span class="floating-shape">★</span>
+        <span class="floating-shape">✦</span>
+        <span class="floating-shape">♥</span>
+        <span class="floating-shape">★</span>
+      </div>
       <div class="hero-content">
 
         <div class="hero-tag">
@@ -616,6 +744,7 @@
     </div>
 
     <div class="hero-right">
+      <div class="mouse-glow" id="mouseGlow"></div>
       <div class="form-wrap">
 
         <p class="form-eyebrow">Lista de espera</p>
@@ -666,19 +795,19 @@
 
   <!-- FEATURES -->
   <section class="features">
-    <div class="feat">
+    <div class="feat reveal">
       <div class="feat-line"></div>
       <div class="feat-emoji">🩹</div>
       <h3 class="feat-title">100% Hidrocoloide</h3>
       <p class="feat-text">El mismo material que usa la dermatología. Absorbe, protege y acelera la recuperación. Funciona de noche, funciona de día.</p>
     </div>
-    <div class="feat">
+    <div class="feat reveal reveal-delay-1">
       <div class="feat-line"></div>
       <div class="feat-emoji">✦</div>
       <h3 class="feat-title">Tres formas icónicas</h3>
       <p class="feat-text">Corazón, estrella, labios. 15 parches por pack con las tres. Porque un granito antes del finde no tiene por qué arruinar el look.</p>
     </div>
-    <div class="feat">
+    <div class="feat reveal reveal-delay-2">
       <div class="feat-line"></div>
       <div class="feat-emoji">🔴</div>
       <h3 class="feat-title">Rojo vibrante</h3>
@@ -688,13 +817,13 @@
 
   <!-- BOTTOM CTA -->
   <section class="bottom-cta">
-    <div>
+    <div class="reveal">
       <h2 class="bottom-title">
         ¿Tenés un evento<br>
         este finde?
       </h2>
     </div>
-    <div>
+    <div class="reveal reveal-delay-1">
       <p class="bottom-right-text">
         Anotate en la lista y sé de las primeras personas en tener ICONS cuando lancemos. Con <strong>descuento exclusivo</strong> solo para quienes estuvieron desde el principio.
       </p>
@@ -735,12 +864,68 @@
       .finally(() => {
         document.getElementById('form-wrap-inner').style.display = 'none';
         document.getElementById('success').classList.add('show');
+        launchConfetti();
       });
     }
 
     document.querySelectorAll('input').forEach(input => {
       input.addEventListener('input', () => { input.style.borderColor = ''; });
     });
+
+    // ── SCROLL REVEAL ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── MOUSE GLOW ──
+    const heroRight = document.querySelector('.hero-right');
+    const mouseGlow = document.getElementById('mouseGlow');
+
+    heroRight.addEventListener('mousemove', (e) => {
+      const rect = heroRight.getBoundingClientRect();
+      mouseGlow.style.left = (e.clientX - rect.left) + 'px';
+      mouseGlow.style.top = (e.clientY - rect.top) + 'px';
+    });
+
+    // ── PARALLAX on background "I" ──
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroLeft = document.querySelector('.hero-left');
+      if (heroLeft) {
+        heroLeft.style.setProperty('--parallax-y', (scrollY * 0.15) + 'px');
+      }
+    }, { passive: true });
+
+    // ── CONFETTI on success ──
+    function launchConfetti() {
+      const container = document.createElement('div');
+      container.className = 'confetti-container';
+      document.body.appendChild(container);
+
+      const colors = ['#C8102E', '#F5F2EE', '#9E0B22', '#FFD700', '#FF6B6B'];
+      const shapes = ['♥', '★', '✦'];
+
+      for (let i = 0; i < 40; i++) {
+        const piece = document.createElement('span');
+        piece.className = 'confetti-piece';
+        piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.color = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.fontSize = (Math.random() * 12 + 8) + 'px';
+        piece.style.animationDelay = Math.random() * 0.8 + 's';
+        piece.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+        container.appendChild(piece);
+      }
+
+      setTimeout(() => container.remove(), 4000);
+    }
   </script>
 
 </body>
